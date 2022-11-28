@@ -17,5 +17,6 @@ for instrument in midi_data.instruments:
             final_data = np.append(list_data, y_shifted)
             print(final_data)
             print(len(list_data))
+        break
 x = librosa.effects.time_stretch(final_data, rate=2)
 sf.write('output.wav', x, sr, subtype='PCM_24')
