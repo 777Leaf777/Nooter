@@ -2,10 +2,13 @@ import pretty_midi
 import librosa
 import numpy as np
 import soundfile as sf
+#Edit the Rate if your audio is too fast or slow
+rate = 2
+
+
 y, sr = librosa.load('noot.wav', sr=8000) # y is a numpy array of the wav file, sr = sample rate
 # Load MIDI file into PrettyMIDI object
 midi_data = pretty_midi.PrettyMIDI('input.mid')
-# Synthesize the resulting MIDI data using sine waves
 list_data = []
 for instrument in midi_data.instruments:
     if not instrument.is_drum:
@@ -18,5 +21,5 @@ for instrument in midi_data.instruments:
             print(final_data)
             print(len(list_data))
         break
-x = librosa.effects.time_stretch(final_data, rate=2)
+x = librosa.effects.time_stretch(final_data, rate)
 sf.write('output.wav', x, sr, subtype='PCM_24')
